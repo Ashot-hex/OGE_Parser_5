@@ -1,4 +1,4 @@
 export type ListenerMessage = {
-    content: string,
-    params: any
-};
+  content: string
+  params: any
+}

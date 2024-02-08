@@ -1,5 +1,4 @@
-export enum Messages
-{
-    GetYearDetails = "GetYearDetails",
-    AskToLoadCorrespondingSemester = "AskToLoadCorrespondingSemester",
+export enum Messages {
+  GetYearDetails = 'GetYearDetails',
+  AskToLoadCorrespondingSemester = 'AskToLoadCorrespondingSemester',
 }

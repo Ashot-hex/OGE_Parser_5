@@ -1,9 +1,3 @@
-**/OGE_Env/**
-**/node_modules/**
-**/webpack/**
-**/.vscode/**
-**/dist/**
-**/.vscode/settings.json
-/Tests/
-.idea/
+node_modules/
 .vscode/
+dist/

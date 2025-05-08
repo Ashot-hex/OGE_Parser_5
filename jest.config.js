@@ -8,4 +8,7 @@ module.exports = {
     },
     verbose: true,
     setupFiles: ["<rootDir>/Tests/Mocks/jest.setup.ts"],
+    moduleNameMapper: {
+        "@model/(.*)": "<rootDir>/src/Model/$1",
+    },
 };

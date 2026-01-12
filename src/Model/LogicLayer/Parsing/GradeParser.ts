@@ -117,6 +117,31 @@ export class GradeParser extends Parser {
     }
 
     /**
+     * Trouve le coefficient du pôle CC (Ressource) d'une UE
+     * @param ue Numero de l'UE
+     * @returns Coefficient du pôle CC
+     */
+    public CCPoleCoefficient(ue: number): number {
+        return this.GetPoleCoefficient(ue, '.cell_BUT_RESSOURCE span span');
+    }
+
+    /**
+     * Trouve le coefficient du pôle SAÉ d'une UE
+     * @param ue Numero de l'UE
+     * @returns Coefficient du pôle SAÉ
+     */
+    public SAEPoleCoefficient(ue: number): number {
+        return this.GetPoleCoefficient(ue, '.cell_BUT_SAE span span');
+    }
+
+    private GetPoleCoefficient(ue: number, selector: string): number {
+        let rawCoeff: string =
+            this.Tables[ue]?.querySelector(selector)?.textContent ?? '';
+
+        return StringParser.ClearCoefficient(rawCoeff);
+    }
+
+    /**
      * Parse le nom d'une UE
      * @param ue Numero de l'UE
      * @returns Nom de l'UE demandée

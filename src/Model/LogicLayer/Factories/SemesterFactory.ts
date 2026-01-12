@@ -20,10 +20,12 @@ export class SemesterFactory {
         return [...Array(count).keys()].map(ix => {
             let coef: number = GradeParser.Instance.UECoefficient(ix);
             let saeIx: number = GradeParser.Instance.SaeIndex(ix);
+            let ccCoef: number = GradeParser.Instance.CCPoleCoefficient(ix);
+            let saeCoef: number = GradeParser.Instance.SAEPoleCoefficient(ix);
             let ressources: Ressource[] = this.Ressources(ix);
             let name: string = GradeParser.Instance.UEName(ix);
 
-            return new UE(coef, ressources, saeIx, name);
+            return new UE(coef, ressources, saeIx, saeCoef, ccCoef, name);
         });
     }
 

@@ -5,3 +5,4 @@
 **/dist/**
 **/.vscode/settings.json
 /Tests/
+.idea/*

@@ -7,23 +7,31 @@ export class UE extends Element {
     //#region private
     private readonly saeIndex: number;
     private readonly name: string;
+    private readonly ccCoef: number;
+    private readonly saeCoef: number;
 
     /**
      * Constructeur par defaut d'une UE
      * @param coefficient Coefficient de l'UE
      * @param ressources Ressources de l'UE
      * @param saeIndex Index a partir du quel on rentre dans les Ressources de SAE, -1 s'il y en a pas
+     * @param saeCoef Coefficient de la partie SAE de l'UE
+     * @param ccCoef Coefficient de la partie Ressources de l'UE
      * @param name Nom de l'UE
      */
     public constructor(
         coefficient: number,
         ressources: Ressource[],
         saeIndex: number,
+        saeCoef: number,
+        ccCoef: number,
         name: string = '',
     ) {
         super(coefficient, ressources);
         this.saeIndex = saeIndex;
         this.name = name;
+        this.saeCoef = saeCoef;
+        this.ccCoef = ccCoef;
     }
 
     /**Nom de l'UE */
@@ -34,6 +42,42 @@ export class UE extends Element {
     /**Index de la premiere ressource du SAE */
     public get SAEIndex(): number {
         return this.saeIndex != -1 ? this.saeIndex : this.Ressources.length;
+    }
+
+    public override get Average(): number {
+        const ccAvg = this.GlobalCCAverage;
+        const saeAvg = this.GlobalSAEAverage;
+
+        let numerator = 0;
+        let denominator = 0;
+
+        if (!isNaN(ccAvg)) {
+            numerator += ccAvg * this.ccCoef;
+            denominator += this.ccCoef;
+        }
+
+        if (!isNaN(saeAvg)) {
+            numerator += saeAvg * this.saeCoef;
+            denominator += this.saeCoef;
+        }
+
+        if (denominator === 0) return NaN;
+
+        return numerator / denominator;
+    }
+
+    /**
+     * Coefficient de la partie ressources de l'UE
+     */
+    public get CcCoefficient(): number {
+        return this.ccCoef;
+    }
+
+    /**
+     * Coefficient de la partie SAE de l'UE
+     */
+    public get SaeCoef():number {
+        return this.saeCoef;
     }
 
     /** Resultats detaillés de l'UE */

@@ -10,6 +10,6 @@ build({
   entryPoints: ['src/content.ts'],
   bundle: true,
   outfile: 'dist/content.js',
-  target: ['chrome112'],
+  target: ['chrome112', 'firefox112'],
   format: 'iife'
 })
